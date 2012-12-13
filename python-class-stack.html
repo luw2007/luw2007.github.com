@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>python实现一个Stack类 - luw2007-blog <em>DEV<em></title>	
+	<meta name="author" content="luw2007">
+	
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0">
+	
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:700,400|Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+		
+	<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+			
+	<link href="./" type="application/atom+xml" rel="alternate" title="luw2007-blog <em>DEV<em> ATOM Feed" />
+		<link href="./feeds/all.rss.xml" type="application/atom+xml" rel="alternate" title="luw2007-blog <em>DEV<em> RSS Feed" />
+	</head>
+	
+<body>		
+	<header class="clearfix" role="banner">
+		<div class="wrapper">
+			<h1 class="huge"><a href=".">luw2007-blog <em>DEV<em></a></h1>
+		</div>
+	</header>
+	
+	<div role="main" class="content clearfix">	
+	<article>
+		<div class="post wrapper">
+			<h1>python实现一个Stack类</h1>
+			<p>python 实现Stack类。</p>
+<p>之前网上也有不同的实现，但是不是感觉版本太老就是感觉写的不好。自己写了一个，请大家指教。</p>
+<div class="codehilite"><pre><span class="c"># -*- coding:utf-8 -*-</span>
+<span class="nb">class</span> <span class="n">Stack</span><span class="p">(</span><span class="n">object</span><span class="p">):</span>
+    <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Stack 类</span>
+<span class="s">    &quot;&quot;&quot;</span>
+    <span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">=</span><span class="n">None</span><span class="p">):</span>
+        <span class="s">&quot;&quot;&quot;doc test</span>
+<span class="s">        &gt;&gt;&gt; s = Stack([1,2,3,4])</span>
+<span class="s">        &gt;&gt;&gt; s.pop()</span>
+<span class="s">        4</span>
+<span class="s">        &gt;&gt;&gt; s.count</span>
+<span class="s">        3</span>
+<span class="s">        &gt;&gt;&gt; e = Stack([1,2,3,4])</span>
+<span class="s">        &gt;&gt;&gt; s != e</span>
+<span class="s">        True</span>
+<span class="s">        &gt;&gt;&gt; s.push(4)</span>
+<span class="s">        &gt;&gt;&gt; s == e</span>
+<span class="s">        True</span>
+<span class="s">        &gt;&gt;&gt; s += e</span>
+<span class="s">        &gt;&gt;&gt; len(s)</span>
+<span class="s">        8</span>
+<span class="s">        &gt;&gt;&gt; s.clear()</span>
+<span class="s">        &gt;&gt;&gt; s.empty</span>
+<span class="s">        True</span>
+<span class="s">        &gt;&gt;&gt; s.top</span>
+<span class="s">        data is empty</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="p">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">other</span> <span class="n">is</span> <span class="nb">not</span> <span class="n">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Stack</span><span class="p">):</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">[:]</span> <span class="p">=</span> <span class="n">other</span><span class="p">.</span><span class="n">data</span>
+            <span class="n">elif</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">tuple</span><span class="p">,</span> <span class="k">set</span><span class="p">)):</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">[:]</span> <span class="p">=</span> <span class="n">list</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">data</span>  <span class="p">=</span> <span class="n">list</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="n">def</span> <span class="n">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;Stack: %s&gt;&quot;</span> <span class="c">% str(self.data)</span>
+
+    <span class="n">def</span> <span class="n">__len__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">def</span> <span class="n">__eq__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">self</span><span class="p">.</span><span class="n">__cast</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="n">def</span> <span class="n">__getitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">def</span> <span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="n">item</span>
+
+    <span class="n">def</span> <span class="n">__delitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">del</span> <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">def</span> <span class="n">__add__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Stack</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">__class__</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">raise</span> <span class="n">TypeError</span><span class="p">(</span><span class="s">&#39;unsupported operand type(s) for +: %s&#39;</span> <span class="c">%(getattr(other,&quot;__class__&quot;,&#39;&#39;)))</span>
+
+    <span class="n">def</span> <span class="n">__iadd__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Stack</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="o">+=</span> <span class="n">other</span><span class="p">.</span><span class="n">data</span>
+            <span class="k">return</span> <span class="n">self</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">raise</span> <span class="n">TypeError</span><span class="p">(</span><span class="s">&#39;unsupported operand type(s) for +=: %s&#39;</span> <span class="c">%(getattr(other,&quot;__class__&quot;,&#39;&#39;)))</span>
+
+    <span class="n">def</span> <span class="n">__cast</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Stack</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">other</span><span class="p">.</span><span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">other</span>
+
+    <span class="p">@</span><span class="n">property</span>
+    <span class="n">def</span> <span class="n">top</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="s">&#39;data is empty&#39;</span>
+            <span class="k">return</span> <span class="n">None</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span>1<span class="p">]</span>
+
+    <span class="p">@</span><span class="n">property</span>
+    <span class="n">def</span> <span class="n">count</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="p">@</span><span class="n">property</span>
+    <span class="n">def</span> <span class="n">empty</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> 0
+
+    <span class="n">def</span> <span class="n">push</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="n">def</span> <span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="s">&#39;data is empty&#39;</span>
+            <span class="k">return</span> <span class="n">None</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="n">def</span> <span class="n">clear</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">data</span> <span class="p">=</span> <span class="p">[]</span>
+</pre></div>
+			
+			<a href="https://twitter.com/share" class="twitter-share-button" data-via="luw2007" data-lang="en" data-size="large" data-related="luw2007">Tweet</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+						
+						
+		</div>
+	
+	<div class="meta wrapper">
+	<time datetime="2011-09-16T00:00:00" pubdate>09-16-2011</time>
+	<ul class="tag clearfix">
+		<li><a href="./category/dev.html">Dev</a></li>
+			<li><a href="./tag/python.html">python</a></li>
+			<li><a href="./tag/stack.html">stack</a></li>
+		</ul>
+	</div>	</article>	
+</div>
+	
+		
+<footer class="clearfix">
+	<div class="wrapper pages">
+		<ul class="nav">
+					<li><a href="./pages/About.html">About me</a></li>
+					<li><a href="./archives.html">Archive</a></li>
+		</ul>
+	</div>
+	
+	<div class="copy wrapper">
+		<ul class="social">
+					</ul>
+	
+		<p role="contentinfo">© 2012 luw2007<br>
+		Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>.</p>
+	</div>
+</footer>
+	
+	<script>
+	  var _gaq=[['_setAccount',''],['_trackPageview']];
+	  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+	  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	  s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
+</body>
+</html>
