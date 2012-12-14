@@ -5,4 +5,4 @@
 &lt;p&gt;目的是让geek很方便的使用markdown 或者rst 写博客.&lt;/p&gt;
 &lt;p&gt;之前在选用pypress之前也接触过直接生成html的一些项目, 不过那个时候觉得写作和部署都很麻烦.&lt;/p&gt;
 &lt;p&gt;随着最近一些项目中使用到了rst和markdown写文档, 加之对git 的熟悉以及对github的喜爱. 决定试用一下pelican.&lt;/p&gt;
-&lt;p&gt;官方的&lt;a href="http://pelican.readthedocs.org/en/latest/"&gt;文档&lt;/a&gt; 很齐全. 配置和使用过程中的问题,都能在官方文档里面找到说明.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">luw2007</dc:creator><pubDate>Fri, 14 Dec 2012 00:00:00 +0800</pubDate><guid>tag:luw2007.github.com,2012-12-14:blog-based-on-pelican.html</guid><category>pelican</category><category>blog</category></item></channel></rss>
+&lt;p&gt;官方的&lt;a href="http://pelican.readthedocs.org/en/latest/"&gt;文档&lt;/a&gt; 很齐全. 配置和使用过程中的问题,都能在官方文档里面找到说明.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">luw2007</dc:creator><pubDate>Fri, 14 Dec 2012 00:00:00 +0800</pubDate><guid>tag:luw2007.github.com,2012-12-14:blog-based-on-pelican.html</guid><category>pelican</category></item></channel></rss>
