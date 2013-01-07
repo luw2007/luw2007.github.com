@@ -57,8 +57,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./blog-based-on-pelican.html"><h1>基于pelican 写blog</h1></a>
-            12-14-2012
+            <a href="./bbcp-a-muliti-scp-tool.html"><h1>bbcp,替代scp的多线程传输工具</h1></a>
+            01-07-2013
 
 by <a class="url fn" href="./author/luw2007.html">luw2007</a>
  
@@ -67,16 +67,111 @@ by <a class="url fn" href="./author/luw2007.html">luw2007</a>
  
         </div>
         
-        <div><p>很久之前在dotcloud上面部署了一个pypress, 更新几篇之后就停歇了.</p>
+        <div><h3>选用bbcp替代scp的原因</h3>
+<p>这两天用scp往服务器上传数据，scp传输速度太慢。特别是网络不太稳定的时候，速度非常慢。惨不忍睹。
+所以想找个替代工具。</p>
+<h3>使用中遇到的问题</h3>
+<p>如何好用， 比scp 快多少就不测试了。这里说说遇到问题。</p>
+<ol>
+<li>需要目标服务器上同样放置bbcp程序。如果有admin权限，比较好办。</li>
+<li>防火墙。由于采用了多个端口同时传输数据， 所以需要开发至少8个端口用于传输数据。<ul>
+<li>目标服务器在公网，并且开放端口，直接传输；</li>
+<li>目标服务器在内网，<ul>
+<li>防火墙映射端口，直接传输。</li>
+<li>目标服务器无法映射端口，本地开放端口或者可以映射端口， 可以使用-Z(同--port 此为12.08.17版本中加入，如果无法使用， 请使用 --help 查看版本) 传输。</li>
+<li>本地也无法映射端口。那就没辙了。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>连接目标服务器ssh的端口貌似没法修改, 默认22。 但是好多服务器都修改了这个端口。（提供了-S， 但是不会设置）</li>
+</ol>
+<h3>bbcp的相关网页</h3>
+<ul>
+<li>
+<p><a href="http://www.slac.stanford.edu/~abh/bbcp/">官方文档 http://www.slac.stanford.edu/~abh/bbcp/</a>, 主要介绍bbcp 的使用方法，并提供源码地址和二进制文件下载。</p>
+<ul>
+<li>
+<p><a href="http://www.slac.stanford.edu/~abh/bbcp/bbcp.git">源码</a></p>
+<div class="codehilite"><pre><span class="n">git</span> <span class="n">clone</span> <span class="n">http:</span><span class="sr">//</span><span class="n">www</span><span class="o">.</span><span class="n">slac</span><span class="o">.</span><span class="n">stanford</span><span class="o">.</span><span class="n">edu</span><span class="sr">/~abh/</span><span class="n">bbcp</span><span class="o">/</span><span class="n">bbcp</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+
+
+</li>
+<li>
+<p><a href="http://www.slac.stanford.edu/~abh/bbcp/bin/">可执行文件官方下载 http://www.slac.stanford.edu/~abh/bbcp/bin/</a>, 目前仅提供一下平台</p>
+<div class="codehilite"><pre><span class="n">amd64_darwin_100</span><span class="o">/</span>       <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">49</span>
+<span class="n">amd64_linux26</span><span class="o">/</span>          <span class="mi">24</span><span class="o">-</span><span class="n">Apr</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">14</span><span class="p">:</span><span class="mi">43</span>
+<span class="n">amd64_rhel50</span><span class="o">/</span>           <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">49</span>
+<span class="n">amd64_rhel60</span><span class="o">/</span>           <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mo">01</span>
+<span class="n">i386_linux26</span><span class="o">/</span>           <span class="mi">19</span><span class="o">-</span><span class="n">May</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">08</span><span class="p">:</span><span class="mi">56</span>
+<span class="n">i386_rhel50</span><span class="o">/</span>            <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">48</span>
+<span class="n">i386_rhel60</span><span class="o">/</span>            <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">49</span>
+<span class="n">sun4x_510</span><span class="o">/</span>              <span class="mi">30</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">23</span><span class="p">:</span><span class="mi">12</span>
+<span class="n">sunx86_510</span><span class="o">/</span>             <span class="mi">12</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">18</span><span class="p">:</span><span class="mi">19</span>
+<span class="n">x86_darwin_100</span><span class="o">/</span>         <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">49</span>
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p><a href="http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html">HOWTO move data</a>, 介绍如何移动数据， 其中介绍到bbcp，以及与rsync的区别， 以下引用的文章目录</p>
+<ol>
+<li>Executive Summary</li>
+<li>Compression &amp; Encryption</li>
+<li>Avoiding data transfer<ol>
+<li>kdirstat</li>
+<li>rsync</li>
+<li>Unison</li>
+</ol>
+</li>
+<li>Streaming Data Transfer<ol>
+<li>bbcp</li>
+<li>bbftp</li>
+<li>Fast Data Transfer (fdt)</li>
+<li>GridFTP</li>
+<li>Globus Online</li>
+<li>netcat</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p><a href="http://pcbunn.cithep.caltech.edu/bbcp/using_bbcp.htm">Using BBCP</a>， 比较详细的介绍</p>
+</li>
+<li><a href="http://imysql.cn/2008_12_08_using_bbcp_instead_scp">用 bbcp 取代 scp</a>，上篇 “Using BBCP” 的中文译文(非全文翻译)</li>
+<li><a href="http://www.nersc.gov/users/data-and-networking/transferring-data/bbcp/">Using bbcp At NERSC</a>, 简单介绍</li>
+<li><a href="http://hutong236.i.sohu.com/blog/view/212355791.htm">bbcp测试</a>， 国人简单的测试</li>
+</ul></div>
+        <hr />
+    </div>
+		
+    
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="./blog-based-on-pelican.html"><h2>基于pelican 写blog</h2></a>
+        <div class= "well small"> 12-14-2012
+
+by <a class="url fn" href="./author/luw2007.html">luw2007</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>很久之前在dotcloud上面部署了一个pypress, 更新几篇之后就停歇了.</p>
 <p>最近在G+上面的ubuntu中文社区看到<a href="https://plus.google.com/107707386440635027405/posts">+mutse young</a>贴了个<a href="https://plus.google.com/photos/107707386440635027405/albums/5820708401840326177" title="pelican on github">使用pelican的截图</a></p>
 <p><a href="https://github.com/getpelican/pelican">pelican </a> 是托管在github上的开源项目. 基于python.</p>
 <p>目的是让geek很方便的使用markdown 或者rst 写博客.</p>
 <p>之前在选用pypress之前也接触过直接生成html的一些项目, 不过那个时候觉得写作和部署都很麻烦.</p>
 <p>随着最近一些项目中使用到了rst和markdown写文档, 加之对git 的熟悉以及对github的喜爱. 决定试用一下pelican.</p>
-<p>官方的<a href="http://pelican.readthedocs.org/en/latest/">文档</a> 很齐全. 配置和使用过程中的问题,都能在官方文档里面找到说明.</p></div>
-        <hr />
-    </div>
-		
+<p>官方的<a href="http://pelican.readthedocs.org/en/latest/">文档</a> 很齐全. 配置和使用过程中的问题,都能在官方文档里面找到说明.</p> <a class="btn btn-info xsmall" href="./blog-based-on-pelican.html">read more</a></div>
+    </div>	
+				
     
  
         
@@ -145,12 +240,12 @@ by <a class="url fn" href="./author/luw2007.html">luw2007</a>
  </div>
         <div class="summary"><p>python 实现Stack类。</p>
 <p>之前网上也有不同的实现，但是不是感觉版本太老就是感觉写的不好。自己写了一个，请大家指教。</p>
-<div class="codehilite"><pre><span class="c"># -*- coding:utf-8 -*-</span>
-<span class="nb">class</span> <span class="n">Stack</span><span class="p">(</span><span class="n">object</span><span class="p">):</span>
+<div class="codehilite"><pre><span class="c1"># -*- coding:utf-8 -*-</span>
+<span class="n">class</span> <span class="n">Stack</span><span class="p">(</span><span class="n">object</span><span class="p">):</span>
     <span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Stack 类</span>
 <span class="s">    &quot;&quot;&quot;</span>
-    <span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">=</span><span class="n">None</span><span class="p">):</span>
+    <span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="n">None</span><span class="p">):</span>
         <span class="s">&quot;&quot;&quot;doc test</span>
 <span class="s">        &gt;&gt;&gt; s = Stack([1,2,3,4])</span>
 <span class="s">        &gt;&gt;&gt; s.pop()</span>
@@ -265,6 +360,7 @@ by <a class="url fn" href="./author/luw2007.html">luw2007</a>
                 
                                 <li><a href="./category/dev.html">Dev</a></li>
                                 <li><a href="./category/blog.html">blog</a></li>
+                                <li><a href="./category/linux.html">linux</a></li>
                                    
             </ul>
             </div>

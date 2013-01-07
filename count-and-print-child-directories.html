@@ -74,81 +74,81 @@ by <a class="url fn" href="./author/luw2007.html">luw2007</a>
 <p>大致结果是ls 和tree快， find 接近是ls 的1.5倍。 os.walk 更慢。测试不太精准，权当娱乐。</p>
 <h2>对照测试具体步骤：</h2>
 <p>利用python os.walk 实现的,disk_walk 模块是利用os.walk 实现，见附录</p>
-<div class="codehilite"><pre><span class="o">~</span>$<span class="o">&gt;</span><span class="nb">cat</span> <span class="n">test_diskwalk</span><span class="p">.</span><span class="n">py</span>
-<span class="n">import</span> <span class="n">disk_walk</span>
-<span class="n">import</span> <span class="n">argparse</span>
+<div class="codehilite"><pre><span class="o">~</span><span class="nv">$</span><span class="err">&gt;</span><span class="nv">cat</span> <span class="n">test_diskwalk</span><span class="o">.</span><span class="n">py</span>
+<span class="nb">import</span> <span class="n">disk_walk</span>
+<span class="nb">import</span> <span class="n">argparse</span>
 
-<span class="n">parser</span> <span class="p">=</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="p">=</span><span class="s">&#39;list contents of directories.&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="p">=</span><span class="s">&#39;path&#39;</span><span class="p">,</span>
-                   <span class="n">help</span><span class="p">=</span><span class="s">&#39;input a directory&#39;</span><span class="p">)</span>
-<span class="n">args</span> <span class="p">=</span> <span class="n">parser</span><span class="p">.</span><span class="n">parse_args</span><span class="p">()</span>
-<span class="n">dirs</span><span class="p">=</span><span class="n">disk_walk</span><span class="p">.</span><span class="n">diskwalk</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">path</span><span class="p">).</span><span class="n">enumerate_dirs</span><span class="p">()</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">&#39;list contents of directories.&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;path&#39;</span><span class="p">,</span>
+                   <span class="n">help</span><span class="o">=</span><span class="s">&#39;input a directory&#39;</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">dirs</span><span class="o">=</span><span class="n">disk_walk</span><span class="o">.</span><span class="n">diskwalk</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">enumerate_dirs</span><span class="p">()</span>
 
-#<span class="n">print</span> <span class="s">&#39; &#39;</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirs</span><span class="p">)</span>
-<span class="n">print</span> <span class="s">&#39;%d directories&#39;</span> <span class="c">% len(dirs)</span>
+<span class="c1">#print &#39; &#39;.join(dirs)</span>
+<span class="k">print</span> <span class="s">&#39;%d directories&#39;</span> <span class="nv">%</span> <span class="nv">len</span><span class="p">(</span><span class="n">dirs</span><span class="p">)</span>
 </pre></div>
 
 
 <p>使用time 进行的测试，需要考虑linux系统的目录缓存。 每次测试前清空缓存
 测试结果如下：</p>
-<div class="codehilite"><pre><span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">fedora</span> <span class="n">lw</span><span class="p">]</span>#  <span class="n">time</span> <span class="n">ls</span> <span class="o">-</span><span class="n">aR</span> <span class="o">/</span><span class="n">usr</span><span class="o">/|</span><span class="n">grep</span> &quot;<span class="p">:</span>$&quot; <span class="o">|</span><span class="n">wc</span> <span class="o">-</span><span class="n">l</span>
-19064
-<span class="nb">real</span> 0<span class="n">m22</span><span class="p">.</span>114<span class="n">s</span>
-<span class="n">user</span> 0<span class="n">m0</span><span class="p">.</span>873<span class="n">s</span>
-<span class="n">sys</span> 0<span class="n">m2</span><span class="p">.</span>151<span class="n">s</span>
+<div class="codehilite"><pre><span class="p">[</span><span class="n">root</span><span class="nv">@fedora</span> <span class="n">lw</span><span class="p">]</span><span class="c1">#  time ls -aR /usr/|grep &quot;:$&quot; |wc -l</span>
+<span class="mi">19064</span>
+<span class="n">real</span> <span class="mi">0</span><span class="n">m22</span><span class="mf">.114</span><span class="n">s</span>
+<span class="n">user</span> <span class="mi">0</span><span class="n">m0</span><span class="mf">.873</span><span class="n">s</span>
+<span class="n">sys</span> <span class="mi">0</span><span class="n">m2</span><span class="mf">.151</span><span class="n">s</span>
 
-<span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">fedora</span> <span class="n">lw</span><span class="p">]</span># <span class="n">time</span> <span class="n">tree</span> <span class="o">-</span><span class="n">ad</span> <span class="o">/</span><span class="n">usr</span><span class="o">/|</span><span class="n">tail</span> <span class="o">-</span>1
-19167 <span class="n">directories</span>
-<span class="nb">real</span> 0<span class="n">m23</span><span class="p">.</span>967<span class="n">s</span>
-<span class="n">user</span> 0<span class="n">m0</span><span class="p">.</span>533<span class="n">s</span>
-<span class="n">sys</span> 0<span class="n">m4</span><span class="p">.</span>013<span class="n">s</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@fedora</span> <span class="n">lw</span><span class="p">]</span><span class="c1"># time tree -ad /usr/|tail -1</span>
+<span class="mi">19167</span> <span class="n">directories</span>
+<span class="n">real</span> <span class="mi">0</span><span class="n">m23</span><span class="mf">.967</span><span class="n">s</span>
+<span class="n">user</span> <span class="mi">0</span><span class="n">m0</span><span class="mf">.533</span><span class="n">s</span>
+<span class="n">sys</span> <span class="mi">0</span><span class="n">m4</span><span class="mf">.013</span><span class="n">s</span>
 
-<span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">fedora</span> <span class="n">lw</span><span class="p">]</span>#  <span class="n">time</span> <span class="n">python</span> <span class="n">test_diskwalk</span><span class="p">.</span><span class="n">py</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span>  <span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
-19167 <span class="n">directories</span>
-<span class="nb">real</span> 0<span class="n">m36</span><span class="p">.</span>643<span class="n">s</span>
-<span class="n">user</span> 0<span class="n">m3</span><span class="p">.</span>384<span class="n">s</span>
-<span class="n">sys</span> 0<span class="n">m4</span><span class="p">.</span>173<span class="n">s</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@fedora</span> <span class="n">lw</span><span class="p">]</span><span class="c1">#  time python test_diskwalk.py /usr/  &gt; /dev/null</span>
+<span class="mi">19167</span> <span class="n">directories</span>
+<span class="n">real</span> <span class="mi">0</span><span class="n">m36</span><span class="mf">.643</span><span class="n">s</span>
+<span class="n">user</span> <span class="mi">0</span><span class="n">m3</span><span class="mf">.384</span><span class="n">s</span>
+<span class="n">sys</span> <span class="mi">0</span><span class="n">m4</span><span class="mf">.173</span><span class="n">s</span>
 
-<span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">fedora</span> <span class="n">lw</span><span class="p">]</span>#  <span class="n">time</span> <span class="nb">find</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span> <span class="o">-</span><span class="n">type</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
-<span class="nb">real</span> 0<span class="n">m32</span><span class="p">.</span>541<span class="n">s</span>
-<span class="n">user</span> 0<span class="n">m0</span><span class="p">.</span>431<span class="n">s</span>
-<span class="n">sys</span> 0<span class="n">m2</span><span class="p">.</span>263<span class="n">s</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@fedora</span> <span class="n">lw</span><span class="p">]</span><span class="c1">#  time find /usr/ -type d &gt; /dev/null</span>
+<span class="n">real</span> <span class="mi">0</span><span class="n">m32</span><span class="mf">.541</span><span class="n">s</span>
+<span class="n">user</span> <span class="mi">0</span><span class="n">m0</span><span class="mf">.431</span><span class="n">s</span>
+<span class="n">sys</span> <span class="mi">0</span><span class="n">m2</span><span class="mf">.263</span><span class="n">s</span>
 </pre></div>
 
 
 <p>可以看到 ls 最快，但是结果不知道什么原因少了很多。 tree 和 test_diskwalk.py 的结果一样，但是速度相差还是比较大的。</p>
 <p>python的程序定制行比较强。如果不是大量io，也无所谓的。</p>
 <h3>附录：disk_walk.py</h3>
-<div class="codehilite"><pre><span class="n">import</span> <span class="n">os</span>
+<div class="codehilite"><pre><span class="nb">import</span> <span class="n">os</span>
 
 <span class="n">class</span> <span class="n">diskwalk</span><span class="p">(</span><span class="n">object</span><span class="p">):</span>
-    &quot;&quot;&quot;<span class="n">API</span> <span class="k">for</span> <span class="n">getting</span> <span class="n">directory</span> <span class="n">walking</span> <span class="n">collections</span>&quot;&quot;&quot;
+    <span class="s">&quot;&quot;&quot;API for getting directory walking collections&quot;&quot;&quot;</span>
     <span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-            <span class="n">self</span><span class="p">.</span><span class="n">path</span> <span class="p">=</span> <span class="n">path</span>
+            <span class="n">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
 
     <span class="n">def</span> <span class="n">enumerate_paths</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
-        &quot;&quot;&quot;<span class="n">Returns</span> <span class="n">the</span> <span class="n">path</span> <span class="n">to</span> <span class="n">all</span> <span class="n">the</span> <span class="n">files</span> <span class="n">in</span> <span class="n">a</span> <span class="n">directory</span> <span class="n">as</span> <span class="n">a</span> <span class="n">list</span>&quot;&quot;&quot;
-        <span class="n">path_collection</span> <span class="p">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">in</span> <span class="n">os</span><span class="p">.</span><span class="n">walk</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">path</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">file</span> <span class="n">in</span> <span class="n">filenames</span><span class="p">:</span>
-                <span class="n">fullpath</span> <span class="p">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-                <span class="n">path_collection</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+        <span class="s">&quot;&quot;&quot;Returns the path to all the files in a directory as a list&quot;&quot;&quot;</span>
+        <span class="n">path_collection</span> <span class="o">=</span> <span class="o">[]</span>
+        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">self</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="n">in</span> <span class="n">filenames:</span>
+                <span class="n">fullpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="nb">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+                <span class="n">path_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">path_collection</span>
 
     <span class="n">def</span> <span class="n">enumerate_files</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
-        &quot;&quot;&quot;<span class="n">Returns</span> <span class="n">all</span> <span class="n">the</span> <span class="n">files</span> <span class="n">in</span> <span class="n">a</span> <span class="n">directory</span> <span class="n">as</span> <span class="n">a</span> <span class="n">list</span>&quot;&quot;&quot;
-        <span class="n">file_collection</span> <span class="p">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">in</span> <span class="n">os</span><span class="p">.</span><span class="n">walk</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">path</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">file</span> <span class="n">in</span> <span class="n">filenames</span><span class="p">:</span>
-                <span class="n">file_collection</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="s">&quot;&quot;&quot;Returns all the files in a directory as a list&quot;&quot;&quot;</span>
+        <span class="n">file_collection</span> <span class="o">=</span> <span class="o">[]</span>
+        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">self</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="n">in</span> <span class="n">filenames:</span>
+                <span class="n">file_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">file_collection</span>
 
     <span class="n">def</span> <span class="n">enumerate_dirs</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
-        &quot;&quot;&quot;<span class="n">Returns</span> <span class="n">all</span> <span class="n">the</span> <span class="n">directories</span> <span class="n">in</span> <span class="n">a</span> <span class="n">directory</span> <span class="n">as</span> <span class="n">a</span> <span class="n">list</span>&quot;&quot;&quot;
-        <span class="n">dir_collection</span> <span class="p">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">in</span> <span class="n">os</span><span class="p">.</span><span class="n">walk</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">path</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">dir</span>  <span class="n">in</span> <span class="n">dirnames</span><span class="p">:</span>
-                <span class="n">dir_collection</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">dir</span><span class="p">)</span>
+        <span class="s">&quot;&quot;&quot;Returns all the directories in a directory as a list&quot;&quot;&quot;</span>
+        <span class="n">dir_collection</span> <span class="o">=</span> <span class="o">[]</span>
+        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">self</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">dir</span>  <span class="n">in</span> <span class="n">dirnames:</span>
+                <span class="n">dir_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dir</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">dir_collection</span>
 </pre></div></div>
 	
@@ -183,6 +183,7 @@ by <a class="url fn" href="./author/luw2007.html">luw2007</a>
                 
                                 <li><a href="./category/dev.html">Dev</a></li>
                                 <li><a href="./category/blog.html">blog</a></li>
+                                <li><a href="./category/linux.html">linux</a></li>
                                    
             </ul>
             </div>
