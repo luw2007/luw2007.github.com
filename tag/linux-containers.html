@@ -116,51 +116,11 @@ by <a class="url fn" href="../author/luw2007.html">luw2007</a>
         <hr />
     </div>
 		
-    
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../bbcp-a-muliti-scp-tool.html"><h2>bbcp,替代scp的多线程传输工具</h2></a>
-        <div class= "well small"> 01-07-2013
-
-by <a class="url fn" href="../author/luw2007.html">luw2007</a>
- 
-
-
- </div>
-        <div class="summary"><h3>选用bbcp替代scp的原因</h3>
-<p>这两天用scp往服务器上传数据，scp传输速度太慢。特别是网络不太稳定的时候，速度非常慢。惨不忍睹。
-所以想找个替代工具。</p>
-<h3>使用中遇到的问题</h3>
-<p>如何好用， 比scp 快多少就不测试了。这里说说遇到问题。</p>
-<ol>
-<li>需要目标服务器上同样放置bbcp程序。如果有admin权限，比较好办。</li>
-<li>防火墙。由于采用了多个端口同时传输数据， 所以需要开发至少8个端口用于传输数据。<ul>
-<li>目标服务器在公网，并且开放端口，直接传输；</li>
-<li>目标服务器在内网，<ul>
-<li>防火墙映射端口，直接传输。</li>
-<li>目标服务器无法映射端口，本地开放端口或者可以映射端口， 可以使用-Z(同--port 此为12.08.17版本中加入，如果无法使用， 请使用 --help 查看版本) 传输。</li>
-<li>本地也无法映射端口。那就没辙了。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>连接目标服务器ssh的端口貌似没法修改, 默认22。 但是好多服务器都修改了这个端口。（提供了-S， 但是不会设置）</li>
-</ol>
-<h3>bbcp的相关网页</h3>
-<ul>
-<li>
-<p><a href="http://www.slac.stanford.edu/~abh/bbcp/">官方文档 http://www.slac.stanford.edu ...</a></p></li></ul> <a class="btn btn-info xsmall" href="../bbcp-a-muliti-scp-tool.html">read more</a></div>
-    </div>	
-				
             <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../category/linux.html">1</a></li>
+    <li class="active"><a href="../tag/linux-containers.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 

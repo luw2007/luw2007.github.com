@@ -9,14 +9,14 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="./theme/html5.js"></script>
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="./theme/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="./theme/local.css" rel="stylesheet">
+    <link href="./theme/pygments.css" rel="stylesheet">
 
 </head>
 
@@ -32,12 +32,12 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="..">luw2007-blog <em>DEV<em></a>
+        <a class="brand" href=".">luw2007-blog <em>DEV<em></a>
 
         <div class="nav-collapse">
         <ul class="nav">
                     
-                            <li><a href="../pages/About.html">About me</a></li>
+                            <li><a href="./pages/About.html">About me</a></li>
                         </ul>
         </div>
         
@@ -50,23 +50,17 @@
     <div class="row">
 
         <div class="span9">
-                
-
-        
-
-
-    <div class='article'>
+            <div class='article'>
         <div class="content-title">
-            <a href="../cgroup-lxc.html"><h1>认识cgroup和 lxc</h1></a>
+            <h1>认识cgroup和 lxc</h1>
             01-09-2013
 
-by <a class="url fn" href="../author/luw2007.html">luw2007</a>
+by <a class="url fn" href="./author/luw2007.html">luw2007</a>
  
 
 
- 
         </div>
-        
+	
         <div><h3>引子</h3>
 <p>[CPyUG] 对于python的sandbox,有什么好的方案吗？
 由python的沙箱引出虚拟化中的两个名词lxc和cgroup。</p>
@@ -113,61 +107,12 @@ by <a class="url fn" href="../author/luw2007.html">luw2007</a>
 <li><a href="https://access.redhat.com/knowledge/docs/zh-CN/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/">https://access.redhat.com/knowledge/docs/zh-CN/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/</a>, 'RHEL6的资源管理指南'。 其中主要介绍cgrous, 由于是针对rhel 系统的。对于非red hat用户建议主要看看概念和机制。</li>
 <li><a href="http://agiletesting.blogspot.com/2011/08/anybody-using-lxc-or-openvz-in.html">http://agiletesting.blogspot.com/2011/08/anybody-using-lxc-or-openvz-in.html</a>, twitter 上lxc 杂谈</li>
 </ul></div>
-        <hr />
-    </div>
-		
-    
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../bbcp-a-muliti-scp-tool.html"><h2>bbcp,替代scp的多线程传输工具</h2></a>
-        <div class= "well small"> 01-07-2013
-
-by <a class="url fn" href="../author/luw2007.html">luw2007</a>
- 
-
-
- </div>
-        <div class="summary"><h3>选用bbcp替代scp的原因</h3>
-<p>这两天用scp往服务器上传数据，scp传输速度太慢。特别是网络不太稳定的时候，速度非常慢。惨不忍睹。
-所以想找个替代工具。</p>
-<h3>使用中遇到的问题</h3>
-<p>如何好用， 比scp 快多少就不测试了。这里说说遇到问题。</p>
-<ol>
-<li>需要目标服务器上同样放置bbcp程序。如果有admin权限，比较好办。</li>
-<li>防火墙。由于采用了多个端口同时传输数据， 所以需要开发至少8个端口用于传输数据。<ul>
-<li>目标服务器在公网，并且开放端口，直接传输；</li>
-<li>目标服务器在内网，<ul>
-<li>防火墙映射端口，直接传输。</li>
-<li>目标服务器无法映射端口，本地开放端口或者可以映射端口， 可以使用-Z(同--port 此为12.08.17版本中加入，如果无法使用， 请使用 --help 查看版本) 传输。</li>
-<li>本地也无法映射端口。那就没辙了。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>连接目标服务器ssh的端口貌似没法修改, 默认22。 但是好多服务器都修改了这个端口。（提供了-S， 但是不会设置）</li>
-</ol>
-<h3>bbcp的相关网页</h3>
-<ul>
-<li>
-<p><a href="http://www.slac.stanford.edu/~abh/bbcp/">官方文档 http://www.slac.stanford.edu ...</a></p></li></ul> <a class="btn btn-info xsmall" href="../bbcp-a-muliti-scp-tool.html">read more</a></div>
-    </div>	
-				
-            <div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../category/linux.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>    
- 
-  
+	
+        <hr>
+    	   
+        <h2>Comments</h2>
+	<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="luw2007">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	    </div>
         </div>
         
         <div class="span3">
@@ -178,8 +123,8 @@ by <a class="url fn" href="../author/luw2007.html">luw2007</a>
                 Site
                 </li>
             
-                <li><a href="../archives.html">Archives</a>
-                <li><a href="../tags.html">Tags</a>
+                <li><a href="./archives.html">Archives</a>
+                <li><a href="./tags.html">Tags</a>
                 <li><a href="http://luw2007.github.com/" rel="alternate">Atom feed</a></li>
                                 <li><a href="http://luw2007.github.com/feeds/all.rss.xml" rel="alternate">RSS feed</a></li>
                             </ul>
@@ -192,9 +137,9 @@ by <a class="url fn" href="../author/luw2007.html">luw2007</a>
                 Categories
                 </li>
                 
-                                <li><a href="../category/dev.html">Dev</a></li>
-                                <li><a href="../category/blog.html">blog</a></li>
-                                <li><a href="../category/linux.html">linux</a></li>
+                                <li><a href="./category/dev.html">Dev</a></li>
+                                <li><a href="./category/blog.html">blog</a></li>
+                                <li><a href="./category/linux.html">linux</a></li>
                                    
             </ul>
             </div>
@@ -218,7 +163,7 @@ by <a class="url fn" href="../author/luw2007.html">luw2007</a>
     </div>     </div> 
 <footer>
 <br />
-<p><a href="..">luw2007-blog <em>DEV<em></a> &copy; luw2007 2012</p>
+<p><a href=".">luw2007-blog <em>DEV<em></a> &copy; luw2007 2012</p>
 </footer>
 
 </div> <!-- /container -->

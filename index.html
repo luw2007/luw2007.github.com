@@ -57,8 +57,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./bbcp-a-muliti-scp-tool.html"><h1>bbcp,替代scp的多线程传输工具</h1></a>
-            01-07-2013
+            <a href="./cgroup-lxc.html"><h1>认识cgroup和 lxc</h1></a>
+            01-09-2013
 
 by <a class="url fn" href="./author/luw2007.html">luw2007</a>
  
@@ -67,7 +67,71 @@ by <a class="url fn" href="./author/luw2007.html">luw2007</a>
  
         </div>
         
-        <div><h3>选用bbcp替代scp的原因</h3>
+        <div><h3>引子</h3>
+<p>[CPyUG] 对于python的sandbox,有什么好的方案吗？
+由python的沙箱引出虚拟化中的两个名词lxc和cgroup。</p>
+<h2>cgroup(control groups)</h2>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/cgroup">cgroup</a>, wikipedia 中的定义</li>
+<li><a href="http://www.kernel.org/doc/Documentation/cgroups/">http://www.kernel.org/doc/Documentation/cgroups/</a>, cgroups 官方文档</li>
+<li><a href="http://www.cnblogs.com/lisperl/tag/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF/">http://www.cnblogs.com/lisperl/tag/虚拟化技术</a>, 这里对官方文档做了翻译</li>
+</ul>
+<h2>Lxc(LinuX Containers)</h2>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Lxc">lxc</a>, wikipedia 中的定义</li>
+<li><a href="http://wiki.archlinux.org/index.php/Linux_Containers">Linux Containers - ArchWiki</a></li>
+<li><a href="https://help.ubuntu.com/community/LXC">LXC - Community Ubuntu Documentation</a>, See also</li>
+<li><a href="http://lxc.teegra.net/">How to LXC - this is one of the best documents available</a>, 比较详细的lxc 的介绍手册</li>
+<li><a href="wiki.gentoo.org/wiki/LXC">LXC - Gentoo Wiki</a></li>
+<li><a href="http://wiki.debian.org/LXC">LXC - Debian Wiki</a></li>
+<li><a href="http://en.opensuse.org/LXC">LXC - openSUSE</a></li>
+<li><a href="https://www.stgraber.org/category/lxc/">https://www.stgraber.org/category/lxc/</a>, ubutnu的软件工程 Stéphane Grabers的blog。</li>
+<li><a href="https://www.stgraber.org/2012/05/04/lxc-in-ubuntu-12-04-lts/">lxc-in-ubuntu-12-04-lts</a>, Stéphane Grabers lxc tutorial</li>
+<li><a href="http://www.ibm.com/developerworks/linux/library/l-lxc-containers/">LXC: Linux container tools</a>, IBM linux 技术中心软件工程师的一篇介绍</li>
+<li><a href="http://www.ibm.com/developerworks/linux/library/l-lxc-security/index.html">Secure Linux containers cookbook</a>, 和上篇是姐妹篇, 通过 LSM(<a href="http://en.wikipedia.org/wiki/Linux_Security_Modules">Linux Security Modules</a>), SELinux(<a href="http://en.wikipedia.org/wiki/SELinux">Security-Enhanced Linux</a>), Smack()</li>
+<li><a href="http://www.janoszen.com/2012/06/04/lxc-linux-containers-on-steroids/">LXC – Linux Containers on Steroids</a>, lxc 简单使用心得</li>
+<li>
+<p><a href="http://www.cnblogs.com/lisperl/archive/2012/06/15/2551067.html">LXC（Linux Containers）的不足和改进</a>, 提出以下观点</p>
+<p>缺少对磁盘配额（disk quota）的支持
+缺少对写时复制（copy on write）的支持
+进程和容器之间的动态关联还不够完善
+不支持checkpoint</p>
+</li>
+</ul>
+<p>由于与OpenVZ同为OS级别的虚拟化技术,免不了对比两者之前的差异。</p>
+<h2>OpenVZ vs LXC</h2>
+<ul>
+<li><a href="http://lwn.net/Articles/507997/">Future of OpenVZ?</a></li>
+<li><a href="https://ask.fedoraproject.org/question/929/openvz-vz-lxc">openvz-vz-lxc</a>, lxc 再次被吐嘈不支持checkpoint。</li>
+<li><a href="http://www.thomas-krenn.com/de/wikiDE/images/3/35/20110511-Lightweight-virtualization-LXC-vs-OpenVZ.pdf">Lightweight-virtualization-LXC-vs-OpenVZ.pdf</a>, 德文写的。</li>
+</ul>
+<p>通过上面的文章可以看到目前lxc 还不适合是用在生产环境。Lxc 依赖的cgroup 早已加入linux kernel mainline中。我比较认同Lxc 最终会替代 OpenVZ。</p>
+<h2>see also</h2>
+<ul>
+<li><a href="http://ubuntuforums.org/showthread.php?t=1382823">http://ubuntuforums.org/showthread.php?t=1382823</a>, Lucid and OpenVZ and/or LXC ?</li>
+<li><a href="http://manpages.ubuntu.com/manpages/karmic/man5/lxc.conf.5.html">http://manpages.ubuntu.com/manpages/karmic/man5/lxc.conf.5.html</a>, lxc.conf 配置帮助</li>
+<li><a href="https://access.redhat.com/knowledge/docs/zh-CN/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/">https://access.redhat.com/knowledge/docs/zh-CN/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/</a>, 'RHEL6的资源管理指南'。 其中主要介绍cgrous, 由于是针对rhel 系统的。对于非red hat用户建议主要看看概念和机制。</li>
+<li><a href="http://agiletesting.blogspot.com/2011/08/anybody-using-lxc-or-openvz-in.html">http://agiletesting.blogspot.com/2011/08/anybody-using-lxc-or-openvz-in.html</a>, twitter 上lxc 杂谈</li>
+</ul></div>
+        <hr />
+    </div>
+		
+    
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="./bbcp-a-muliti-scp-tool.html"><h2>bbcp,替代scp的多线程传输工具</h2></a>
+        <div class= "well small"> 01-07-2013
+
+by <a class="url fn" href="./author/luw2007.html">luw2007</a>
+ 
+
+
+ </div>
+        <div class="summary"><h3>选用bbcp替代scp的原因</h3>
 <p>这两天用scp往服务器上传数据，scp传输速度太慢。特别是网络不太稳定的时候，速度非常慢。惨不忍睹。
 所以想找个替代工具。</p>
 <h3>使用中遇到的问题</h3>
@@ -89,65 +153,9 @@ by <a class="url fn" href="./author/luw2007.html">luw2007</a>
 <h3>bbcp的相关网页</h3>
 <ul>
 <li>
-<p><a href="http://www.slac.stanford.edu/~abh/bbcp/">官方文档 http://www.slac.stanford.edu/~abh/bbcp/</a>, 主要介绍bbcp 的使用方法，并提供源码地址和二进制文件下载。</p>
-<ul>
-<li>
-<p><a href="http://www.slac.stanford.edu/~abh/bbcp/bbcp.git">源码</a></p>
-<div class="codehilite"><pre><span class="n">git</span> <span class="n">clone</span> <span class="n">http:</span><span class="sr">//</span><span class="n">www</span><span class="o">.</span><span class="n">slac</span><span class="o">.</span><span class="n">stanford</span><span class="o">.</span><span class="n">edu</span><span class="sr">/~abh/</span><span class="n">bbcp</span><span class="o">/</span><span class="n">bbcp</span><span class="o">.</span><span class="n">git</span>
-</pre></div>
-
-
-</li>
-<li>
-<p><a href="http://www.slac.stanford.edu/~abh/bbcp/bin/">可执行文件官方下载 http://www.slac.stanford.edu/~abh/bbcp/bin/</a>, 目前仅提供一下平台</p>
-<div class="codehilite"><pre><span class="n">amd64_darwin_100</span><span class="o">/</span>       <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">49</span>
-<span class="n">amd64_linux26</span><span class="o">/</span>          <span class="mi">24</span><span class="o">-</span><span class="n">Apr</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">14</span><span class="p">:</span><span class="mi">43</span>
-<span class="n">amd64_rhel50</span><span class="o">/</span>           <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">49</span>
-<span class="n">amd64_rhel60</span><span class="o">/</span>           <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mo">01</span>
-<span class="n">i386_linux26</span><span class="o">/</span>           <span class="mi">19</span><span class="o">-</span><span class="n">May</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">08</span><span class="p">:</span><span class="mi">56</span>
-<span class="n">i386_rhel50</span><span class="o">/</span>            <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">48</span>
-<span class="n">i386_rhel60</span><span class="o">/</span>            <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">49</span>
-<span class="n">sun4x_510</span><span class="o">/</span>              <span class="mi">30</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">23</span><span class="p">:</span><span class="mi">12</span>
-<span class="n">sunx86_510</span><span class="o">/</span>             <span class="mi">12</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">18</span><span class="p">:</span><span class="mi">19</span>
-<span class="n">x86_darwin_100</span><span class="o">/</span>         <span class="mi">17</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2012</span> <span class="mi">19</span><span class="p">:</span><span class="mi">49</span>
-</pre></div>
-
-
-</li>
-</ul>
-</li>
-<li>
-<p><a href="http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html">HOWTO move data</a>, 介绍如何移动数据， 其中介绍到bbcp，以及与rsync的区别， 以下引用的文章目录</p>
-<ol>
-<li>Executive Summary</li>
-<li>Compression &amp; Encryption</li>
-<li>Avoiding data transfer<ol>
-<li>kdirstat</li>
-<li>rsync</li>
-<li>Unison</li>
-</ol>
-</li>
-<li>Streaming Data Transfer<ol>
-<li>bbcp</li>
-<li>bbftp</li>
-<li>Fast Data Transfer (fdt)</li>
-<li>GridFTP</li>
-<li>Globus Online</li>
-<li>netcat</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>
-<p><a href="http://pcbunn.cithep.caltech.edu/bbcp/using_bbcp.htm">Using BBCP</a>， 比较详细的介绍</p>
-</li>
-<li><a href="http://imysql.cn/2008_12_08_using_bbcp_instead_scp">用 bbcp 取代 scp</a>，上篇 “Using BBCP” 的中文译文(非全文翻译)</li>
-<li><a href="http://www.nersc.gov/users/data-and-networking/transferring-data/bbcp/">Using bbcp At NERSC</a>, 简单介绍</li>
-<li><a href="http://hutong236.i.sohu.com/blog/view/212355791.htm">bbcp测试</a>， 国人简单的测试</li>
-</ul></div>
-        <hr />
-    </div>
-		
+<p><a href="http://www.slac.stanford.edu/~abh/bbcp/">官方文档 http://www.slac.stanford.edu ...</a></p></li></ul> <a class="btn btn-info xsmall" href="./bbcp-a-muliti-scp-tool.html">read more</a></div>
+    </div>	
+				
     
  
         

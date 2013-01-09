@@ -50,47 +50,37 @@
     <div class="row">
 
         <div class="span9">
-        
-<h1>Archives</h1>
+            <div class='article'>
+        <div class="content-title">
+            <h1>认识lxc与cgroup</h1>
+            01-09-2013
 
-<table class="table">
-    <tbody>
-            <tr>
-        <td>09 Jan 2013</td>
-        <td><a href='cgroup-lxc.html'>认识cgroup和 lxc</a></td>
-        </tr>
-            <tr>
-        <td>07 Jan 2013</td>
-        <td><a href='bbcp-a-muliti-scp-tool.html'>bbcp,替代scp的多线程传输工具</a></td>
-        </tr>
-            <tr>
-        <td>14 Dec 2012</td>
-        <td><a href='blog-based-on-pelican.html'>基于pelican 写blog</a></td>
-        </tr>
-            <tr>
-        <td>21 Oct 2011</td>
-        <td><a href='blog-update.html'>关于博客更新的想法</a></td>
-        </tr>
-            <tr>
-        <td>21 Sep 2011</td>
-        <td><a href='shi-ci-heng-zhuan-2.html'>莫工厂的面试题之一古诗横转(二)</a></td>
-        </tr>
-            <tr>
-        <td>16 Sep 2011</td>
-        <td><a href='python-class-stack.html'>python实现一个Stack类</a></td>
-        </tr>
-            <tr>
-        <td>16 Sep 2011</td>
-        <td><a href='shi-ci-heng-zhuan.html'>莫工厂的面试题之一古诗横转</a></td>
-        </tr>
-            <tr>
-        <td>08 Sep 2011</td>
-        <td><a href='count-and-print-child-directories.html'>计算当前目录下的子目录数量并打印子目录名称</a></td>
-        </tr>
-        </tbody>
-</table>
+by <a class="url fn" href="./author/luw2007.html">luw2007</a>
+ 
 
 
+        </div>
+	
+        <div><p>邮件：[CPyUG] 对于python的sandbox，有什么好的方案吗？</p>
+<p>由python的沙箱引出虚拟化中的两个名词lxc和cgroup。</p>
+<p>首先我们看看wikipedia中的定义</p>
+<p><a href="http://en.wikipedia.org/wiki/Lxc">lxc</a></p>
+<p><a href="http://en.wikipedia.org/wiki/cgroup">cgroup</a></p>
+<p><a href="http://www.cnblogs.com/lisperl/archive/2012/06/15/2551067.html">LXC（Linux Containers）的不足和改进</a> 提出</p>
+<div class="codehilite"><pre><span class="err">缺少对磁盘配额（</span><span class="n">disk</span> <span class="n">quota</span><span class="err">）的支持</span>
+<span class="err">缺少对写时复制（</span><span class="n">copy</span> <span class="n">on</span> <span class="nb">write</span><span class="err">）的支持</span>
+<span class="err">进程和容器之间的动态关联还不够完善</span>
+<span class="err">不支持</span><span class="n">checkpoint</span>
+</pre></div>
+
+
+<p>关于lxc其中不支持checkpoint 也被<a href="https://ask.fedoraproject.org/question/929/openvz-vz-lxc">OpenVZ vz LXC</a>中吐嘈。</p></div>
+	
+        <hr>
+    	   
+        <h2>Comments</h2>
+	<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="luw2007">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	    </div>
         </div>
         
         <div class="span3">
